@@ -1,3 +1,5 @@
+import os
+
 from extract import extract_data
 from validation import validate_data
 from transform import clean_data, create_daily_sales, create_monthly_sales, create_top_items
@@ -21,6 +23,7 @@ def run_pipeline():
     monthly_sales = create_monthly_sales(cleaned_df)
     top_items = create_top_items(cleaned_df)
 
+    os.makedirs("data/processed", exist_ok=True)
     cleaned_df.to_csv("data/processed/sales.csv", index=False)
     daily_sales.to_csv("data/processed/daily_sales.csv", index=False)
     monthly_sales.to_csv("data/processed/monthly_sales.csv", index=False)
